@@ -56,8 +56,8 @@ class YogaTimerApp:
         self.canvas = tk.Canvas(master, width=700, height=600, bg='white')
         self.canvas.pack()
         self.circle = self.canvas.create_arc(
-            55, 10, 645, 600, start=90, extent=360, fill=COLOR_POSE)
-        self.inner_circle = self.canvas.create_oval(205, 160, 495, 450, fill=COLOR_INNER_CIRCLE, outline="")
+            55, 10, 645, 600, start=90, extent=360, fill=COLOR_POSE, outline=COLOR_POSE)
+        self.inner_circle = self.canvas.create_oval(205, 160, 495, 450, fill=COLOR_INNER_CIRCLE, outline=COLOR_INNER_CIRCLE)
         self.timer_text = self.canvas.create_text(350, 305, text="", font=("Helvetica", 30), fill="black")
         
     def toggle_pause(self):
@@ -72,7 +72,7 @@ class YogaTimerApp:
         self.running = False
         self.current_pose_index = 0
         self.pose_label.config(text="")
-        self.canvas.itemconfig(self.circle, start=90, extent=360, fill=COLOR_POSE)
+        self.canvas.itemconfig(self.circle, start=90, extent=360, fill=COLOR_POSE, outline=COLOR_POSE)
         self.day_selector.current(0)  # Reset to Day 1
         self.start_button.config(state=tk.NORMAL)
         self.pause_button.config(text="Pause", state=tk.DISABLED)
@@ -133,9 +133,9 @@ class YogaTimerApp:
         pose_duration = duration
         while duration > 0 and self.running:
             extent = (duration * 360) / pose_duration
-            self.canvas.itemconfig(self.circle, start=90, extent=extent, fill=COLOR_POSE)
+            self.canvas.itemconfig(self.circle, start=90, extent=extent, fill=COLOR_POSE, outline=COLOR_POSE)
             # Update the timer text
-            self.canvas.itemconfig(self.timer_text, text=str(round(duration)))
+            self.canvas.itemconfig(self.timer_text, text=self.seconds_to_minutes(duration))
             time.sleep(SPEED_DECREASE)
             duration -= SPEED_DECREASE
             self.master.update()
@@ -146,15 +146,18 @@ class YogaTimerApp:
         total_transition_time = duration
         while duration > 0 and self.running:
             extent = (duration * 360) / total_transition_time
-            self.canvas.itemconfig(self.circle, start=90, extent=extent, fill=COLOR_TRANSITION)
+            self.canvas.itemconfig(self.circle, start=90, extent=extent, fill=COLOR_TRANSITION, outline=COLOR_TRANSITION)
             # Update the timer text
-            self.canvas.itemconfig(self.timer_text, text=str(round(duration)))
+            self.canvas.itemconfig(self.timer_text, text=self.seconds_to_minutes(duration))
             time.sleep(SPEED_DECREASE)
             duration -= SPEED_DECREASE
             self.master.update()
 
     def speak(self, text):
         playsound('ding.mp3')
+
+    def seconds_to_minutes(self, seconds):
+        return f"{round(seconds // 60)}:{round(seconds) % 60}s"
 
 
 def load_plan(file_path):
