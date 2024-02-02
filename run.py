@@ -167,7 +167,6 @@ def main():
     # Ensure this path is correct
     yoga_plan = load_plan("yoga_plan_complete.json")
     app = YogaTimerApp(root, yoga_plan)
-    root.wm_attributes('-fullscreen', 'true')
     with keep.presenting() as k:
         root.mainloop()
 
