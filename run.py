@@ -58,7 +58,7 @@ class YogaTimerApp:
         self.circle = self.canvas.create_arc(
             55, 10, 645, 600, start=90, extent=360, fill=COLOR_POSE, outline=COLOR_POSE)
         self.inner_circle = self.canvas.create_oval(205, 160, 495, 450, fill=COLOR_INNER_CIRCLE, outline=COLOR_INNER_CIRCLE)
-        self.timer_text = self.canvas.create_text(350, 305, text="", font=("Helvetica", 30), fill="black")
+        self.timer_text = self.canvas.create_text(350, 305, text="", font=("Helvetica", 30), fill="snow4")
         
     def toggle_pause(self):
         self.running = not self.running
@@ -157,7 +157,7 @@ class YogaTimerApp:
         playsound('ding.mp3')
 
     def seconds_to_minutes(self, seconds):
-        return f"{round(seconds // 60)}:{round(seconds) % 60}s"
+        return f"{round(seconds // 60)}:{round(seconds) % 60}"
 
 
 def load_plan(file_path):
