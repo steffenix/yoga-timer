@@ -6,11 +6,21 @@ import json
 from playsound import playsound
 import subprocess
 from wakepy import keep
+import os
 
-TRANSITION_TIME = 15
-COLOR_POSE = "#d4f797"
-COLOR_TRANSITION = "#b5f7ed"
-COLOR_INNER_CIRCLE = "white"
+def load_config(file_path):
+    file_path = 'config.json'
+    file_path = file_path if os.path.exists(file_path) else 'config_example.json'
+    with open(file_path, 'r') as file:
+        return json.load(file)
+
+config = load_config("config.json")
+
+TRANSITION_TIME = config["transition_duration"]
+COLOR_POSE = config["color_pose"]
+COLOR_TRANSITION = config["color_transition"]
+COLOR_INNER_CIRCLE = config["color_inner_circle"]
+COLOR_INNER_TEXT = config["color_inner_text"]
 SPEED_DECREASE = 0.1
 
 class YogaTimerApp:
@@ -58,7 +68,7 @@ class YogaTimerApp:
         self.circle = self.canvas.create_arc(
             55, 10, 645, 600, start=90, extent=360, fill=COLOR_POSE, outline=COLOR_POSE)
         self.inner_circle = self.canvas.create_oval(205, 160, 495, 450, fill=COLOR_INNER_CIRCLE, outline=COLOR_INNER_CIRCLE)
-        self.timer_text = self.canvas.create_text(350, 305, text="", font=("Helvetica", 30), fill="snow4")
+        self.timer_text = self.canvas.create_text(350, 305, text="", font=("Helvetica", 30), fill=COLOR_INNER_TEXT)
         
     def toggle_pause(self):
         self.running = not self.running
@@ -157,13 +167,15 @@ class YogaTimerApp:
         playsound('ding.mp3')
 
     def seconds_to_minutes(self, seconds):
-        return f"{round(seconds // 60)}:{round(seconds) % 60}"
-
+        minutes = round(seconds // 60)
+        remaining_seconds = round(seconds) % 60
+        minutes_text = f"{minutes}" if minutes > 9 else f"0{minutes}"
+        seconds_text = f"{remaining_seconds}" if remaining_seconds > 9 else f"0{remaining_seconds}"
+        return f"{minutes_text}:{seconds_text}"
 
 def load_plan(file_path):
     with open(file_path, 'r') as file:
         return json.load(file)
-
 
 def main():
     root = tk.Tk()
