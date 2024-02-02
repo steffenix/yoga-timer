@@ -12,5 +12,5 @@ pip install -r requirements.txt
 
 ```bash
 source venv/bin/activate
-python3 main.py
+python3 run.py
 ```
