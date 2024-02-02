@@ -1,0 +1,371 @@
+{
+    "Day 1": {
+        "Poses": [
+            {
+                "Name": "Butterfly Pose",
+                "Duration": 300
+            },
+            {
+                "Name": "Seated Twist (Debounce)",
+                "Duration": 120,
+                "Side": "each"
+            },
+            {
+                "Name": "Sphinx Pose",
+                "Duration": 300
+            },
+            {
+                "Name": "Child's Pose (Debounce)",
+                "Duration": 120
+            },
+            {
+                "Name": "Caterpillar Pose",
+                "Duration": 300
+            },
+            {
+                "Name": "Easy Seated Forward Bend (Debounce)",
+                "Duration": 120
+            },
+            {
+                "Name": "Legs up the Wall",
+                "Duration": 300
+            },
+            {
+                "Name": "Happy Baby Pose (Additional)",
+                "Duration": 180
+            }
+        ]
+    },
+    "Day 2": {
+        "Poses": [
+            {
+                "Name": "Half Butterfly",
+                "Duration": 240,
+                "Side": "each"
+            },
+            {
+                "Name": "Gentle Spinal Twist (Debounce)",
+                "Duration": 120,
+                "Side": "each"
+            },
+            {
+                "Name": "Dragonfly Pose",
+                "Duration": 300
+            },
+            {
+                "Name": "Lying Knee Hug (Debounce)",
+                "Duration": 120,
+                "Side": "each"
+            },
+            {
+                "Name": "Swan Pose",
+                "Duration": 240,
+                "Side": "each"
+            },
+            {
+                "Name": "Windshield Wipers (Debounce)",
+                "Duration": 120
+            },
+            {
+                "Name": "Reclining Pigeon Pose (Additional)",
+                "Duration": 180,
+                "Side": "each"
+            }
+        ]
+    },
+    "Day 3": {
+        "Poses": [
+            {
+                "Name": "Seal Pose",
+                "Duration": 300
+            },
+            {
+                "Name": "Child's Pose (Debounce)",
+                "Duration": 120
+            },
+            {
+                "Name": "Twisted Roots",
+                "Duration": 240,
+                "Side": "each"
+            },
+            {
+                "Name": "Neutral Lying Down (Debounce)",
+                "Duration": 120
+            },
+            {
+                "Name": "Reclining Hand-to-Big-Toe Pose",
+                "Duration": 180,
+                "Side": "each"
+            },
+            {
+                "Name": "Supine Twist (Debounce)",
+                "Duration": 180,
+                "Side": "each"
+            },
+            {
+                "Name": "Bridge Pose (Additional)",
+                "Duration": 180
+            }
+        ]
+    },
+    "Day 4": {
+        "Poses": [
+            {
+                "Name": "Caterpillar Pose",
+                "Duration": 300
+            },
+            {
+                "Name": "Easy Seated Pose (Debounce)",
+                "Duration": 120
+            },
+            {
+                "Name": "Half Butterfly",
+                "Duration": 240,
+                "Side": "each"
+            },
+            {
+                "Name": "Windshield Wipers (Debounce)",
+                "Duration": 120
+            },
+            {
+                "Name": "Legs up the Wall",
+                "Duration": 300
+            },
+            {
+                "Name": "Seated Forward Bend (Debounce)",
+                "Duration": 120
+            },
+            {
+                "Name": "Reclining Twist",
+                "Duration": 240,
+                "Side": "each"
+            },
+            {
+                "Name": "Standing Forward Fold (Additional)",
+                "Duration": 180
+            }
+        ]
+    },
+    "Day 5": {
+        "Poses": [
+            {
+                "Name": "Dragon Pose",
+                "Duration": 240,
+                "Side": "each"
+            },
+            {
+                "Name": "Downward Dog (Debounce)",
+                "Duration": 120
+            },
+            {
+                "Name": "Shoelace Pose",
+                "Duration": 240,
+                "Side": "each"
+            },
+            {
+                "Name": "Neutral Lying Down (Debounce)",
+                "Duration": 120
+            },
+            {
+                "Name": "Sphinx Pose",
+                "Duration": 300
+            },
+            {
+                "Name": "Child's Pose (Debounce)",
+                "Duration": 120
+            },
+            {
+                "Name": "Supine Butterfly",
+                "Duration": 300
+            },
+            {
+                "Name": "Wide-Legged Forward Bend (Additional)",
+                "Duration": 180
+            }
+        ]
+    },
+    "Day 6": {
+        "Poses": [
+            {
+                "Name": "Dragonfly Pose",
+                "Duration": 300
+            },
+            {
+                "Name": "Seated Gentle Twist (Debounce)",
+                "Duration": 120,
+                "Side": "each"
+            },
+            {
+                "Name": "Half Butterfly",
+                "Duration": 240,
+                "Side": "each"
+            },
+            {
+                "Name": "Lying Knee Hug (Debounce)",
+                "Duration": 120,
+                "Side": "each"
+            },
+            {
+                "Name": "Swan Pose",
+                "Duration": 240,
+                "Side": "each"
+            },
+            {
+                "Name": "Windshield Wipers (Debounce)",
+                "Duration": 120
+            },
+            {
+                "Name": "Forward Fold with Toes Grab (Additional)",
+                "Duration": 180
+            }
+        ]
+    },
+    "Day 7": {
+        "Poses": [
+            {
+                "Name": "Caterpillar Pose",
+                "Duration": 300
+            },
+            {
+                "Name": "Seated Forward Bend (Debounce)",
+                "Duration": 120
+            },
+            {
+                "Name": "Seal Pose",
+                "Duration": 300
+            },
+            {
+                "Name": "Child's Pose (Debounce)",
+                "Duration": 120
+            },
+            {
+                "Name": "Twisted Roots",
+                "Duration": 240,
+                "Side": "each"
+            },
+            {
+                "Name": "Neutral Lying Down (Debounce)",
+                "Duration": 120
+            },
+            {
+                "Name": "Lying Spinal Twist (Additional)",
+                "Duration": 180,
+                "Side": "each"
+            }
+        ]
+    },
+    "Day 8": {
+        "Poses": [
+            {
+                "Name": "Dragon Pose",
+                "Duration": 240,
+                "Side": "each"
+            },
+            {
+                "Name": "Downward Dog (Debounce)",
+                "Duration": 120
+            },
+            {
+                "Name": "Shoelace Pose",
+                "Duration": 240,
+                "Side": "each"
+            },
+            {
+                "Name": "Easy Seated Pose (Debounce)",
+                "Duration": 120
+            },
+            {
+                "Name": "Reclining Butterfly",
+                "Duration": 300
+            },
+            {
+                "Name": "Supine Twist (Debounce)",
+                "Duration": 180,
+                "Side": "each"
+            },
+            {
+                "Name": "Ankle-to-Knee Pose (Additional)",
+                "Duration": 180,
+                "Side": "each"
+            }
+        ]
+    },
+    "Day 9": {
+        "Poses": [
+            {
+                "Name": "Half Butterfly",
+                "Duration": 240,
+                "Side": "each"
+            },
+            {
+                "Name": "Windshield Wipers (Debounce)",
+                "Duration": 120
+            },
+            {
+                "Name": "Dragonfly Pose",
+                "Duration": 300
+            },
+            {
+                "Name": "Seated Gentle Twist (Debounce)",
+                "Duration": 120,
+                "Side": "each"
+            },
+            {
+                "Name": "Swan Pose",
+                "Duration": 240,
+                "Side": "each"
+            },
+            {
+                "Name": "Neutral Lying Down (Debounce)",
+                "Duration": 120
+            },
+            {
+                "Name": "Legs up the Wall",
+                "Duration": 300
+            },
+            {
+                "Name": "Wide-Angle Seated Forward Bend (Additional)",
+                "Duration": 180
+            }
+        ]
+    },
+    "Day 10": {
+        "Poses": [
+            {
+                "Name": "Caterpillar Pose",
+                "Duration": 300
+            },
+            {
+                "Name": "Seated Twist (Debounce)",
+                "Duration": 120,
+                "Side": "each"
+            },
+            {
+                "Name": "Sphinx Pose",
+                "Duration": 300
+            },
+            {
+                "Name": "Child's Pose (Debounce)",
+                "Duration": 120
+            },
+            {
+                "Name": "Shoelace Pose",
+                "Duration": 240,
+                "Side": "each"
+            },
+            {
+                "Name": "Easy Seated Forward Bend (Debounce)",
+                "Duration": 120
+            },
+            {
+                "Name": "Reclining Hand-to-Big-Toe Pose",
+                "Duration": 180,
+                "Side": "each"
+            },
+            {
+                "Name": "Supine Hero Pose (Additional)",
+                "Duration": 180
+            }
+        ]
+    }
+}
