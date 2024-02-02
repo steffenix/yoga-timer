@@ -16,15 +16,15 @@
             },
             {
                 "Name": "Child's Pose (Debounce)",
-                "Duration": 120
+                "Duration": 60
             },
             {
                 "Name": "Caterpillar Pose",
                 "Duration": 300
             },
             {
-                "Name": "Easy Seated Forward Bend (Debounce)",
-                "Duration": 120
+                "Name": "Child's Pose (Debounce)",
+                "Duration": 60
             },
             {
                 "Name": "Legs up the Wall",

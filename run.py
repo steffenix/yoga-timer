@@ -4,13 +4,17 @@ import time
 import threading
 import json
 from playsound import playsound
+import subprocess
+from wakepy import keep
 
 TRANSITION_TIME = 15
 COLOR_POSE = "#d4f797"
 COLOR_TRANSITION = "#b5f7ed"
-SPEED_DECREASE = 0.02
+COLOR_INNER_CIRCLE = "white"
+SPEED_DECREASE = 0.1
 
 class YogaTimerApp:
+
     def __init__(self, master, plan):
         self.master = master
         master.title("Yoga Pose Timer")
@@ -52,8 +56,10 @@ class YogaTimerApp:
         self.canvas = tk.Canvas(master, width=700, height=600, bg='white')
         self.canvas.pack()
         self.circle = self.canvas.create_arc(
-            10, 10, 690, 590, start=90, extent=360, fill=COLOR_POSE)
-
+            55, 10, 645, 600, start=90, extent=360, fill=COLOR_POSE)
+        self.inner_circle = self.canvas.create_oval(205, 160, 495, 450, fill=COLOR_INNER_CIRCLE, outline="")
+        self.timer_text = self.canvas.create_text(350, 305, text="", font=("Helvetica", 30), fill="black")
+        
     def toggle_pause(self):
         self.running = not self.running
         if self.running:
@@ -122,25 +128,27 @@ class YogaTimerApp:
             self.current_pose_index = 0  # Reset for next session
 
     def perform_pose(self, duration, pose_name):
-        """Performs the countdown for a pose's duration with a red circle."""
+        """Updated to modify the inner circle and timer text."""
         self.pose_label.config(text=pose_name)
         pose_duration = duration
         while duration > 0 and self.running:
             extent = (duration * 360) / pose_duration
-            self.canvas.itemconfig(self.circle, start=90,
-                                   extent=extent, fill=COLOR_POSE)
+            self.canvas.itemconfig(self.circle, start=90, extent=extent, fill=COLOR_POSE)
+            # Update the timer text
+            self.canvas.itemconfig(self.timer_text, text=str(round(duration)))
             time.sleep(SPEED_DECREASE)
             duration -= SPEED_DECREASE
             self.master.update()
 
     def transition_period(self, duration, message):
-        """Handles the transition period between poses with a blue circle."""
+        """Updated to modify the inner circle and timer text during transitions."""
         self.pose_label.config(text=message)
-        total_transition_time = duration  # Total time allocated for transitions
+        total_transition_time = duration
         while duration > 0 and self.running:
             extent = (duration * 360) / total_transition_time
-            self.canvas.itemconfig(self.circle, start=90,
-                                   extent=extent, fill=COLOR_TRANSITION)
+            self.canvas.itemconfig(self.circle, start=90, extent=extent, fill=COLOR_TRANSITION)
+            # Update the timer text
+            self.canvas.itemconfig(self.timer_text, text=str(round(duration)))
             time.sleep(SPEED_DECREASE)
             duration -= SPEED_DECREASE
             self.master.update()
@@ -159,7 +167,9 @@ def main():
     # Ensure this path is correct
     yoga_plan = load_plan("yoga_plan_complete.json")
     app = YogaTimerApp(root, yoga_plan)
-    root.mainloop()
+    root.wm_attributes('-fullscreen', 'true')
+    with keep.presenting() as k:
+        root.mainloop()
 
 
 if __name__ == "__main__":
