@@ -8,6 +8,8 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+It might be necessary to run: `brew install python-tk``
+
 ## Usage
 
 ```bash

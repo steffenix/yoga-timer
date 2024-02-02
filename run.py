@@ -128,7 +128,7 @@ class YogaTimerApp:
         while duration > 0 and self.running:
             extent = (duration * 360) / pose_duration
             self.canvas.itemconfig(self.circle, start=90,
-                                   extent=extent, fill="red")
+                                   extent=extent, fill=COLOR_POSE)
             time.sleep(SPEED_DECREASE)
             duration -= SPEED_DECREASE
             self.master.update()
