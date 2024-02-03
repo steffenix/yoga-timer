@@ -67,11 +67,11 @@ class YogaTimerApp:
         self.pose_label = ttk.Label(master, text="", style="Big.TLabel")
         self.pose_label.pack(pady=0)
 
-        self.canvas = tk.Canvas(master, width=700, height=600, bg='systemTransparent')
+        self.canvas = tk.Canvas(master, width=700, height=600)
         self.canvas.pack()
         self.canvas.place(x=0.0, y=150.0)
         self.circle = self.canvas.create_arc(
-            55, 10, 645, 600, start=90, extent=360, fill=COLOR_POSE, outline=COLOR_POSE)
+            55, 10, 645, 600, start=90, extent=360, fill=COLOR_POSE, outline="systemTransparent")
         self.inner_circle = self.canvas.create_oval(205, 160, 495, 450, fill=COLOR_INNER_CIRCLE, outline=COLOR_INNER_CIRCLE)
         self.timer_text = self.canvas.create_text(350, 305, text="", font=("Bangla MN", 30), fill=COLOR_INNER_TEXT)
          # Initial placeholder image
@@ -92,7 +92,7 @@ class YogaTimerApp:
         self.running = False
         self.current_pose_index = 0
         self.pose_label.config(text="")
-        self.canvas.itemconfig(self.circle, start=90, extent=360, fill=COLOR_POSE, outline=COLOR_POSE)
+        self.canvas.itemconfig(self.circle, start=90, extent=360, fill=COLOR_POSE)
         self.day_selector.current(0)  # Reset to Day 1
         self.start_button.config(state=tk.NORMAL)
         self.pause_button.config(text="Pause", state=tk.DISABLED)
@@ -186,7 +186,7 @@ class YogaTimerApp:
         total_time = duration
         while duration > 0 and self.running:
             extent = (duration * 360) / total_time
-            self.canvas.itemconfig(self.circle, start=90, extent=extent, fill=color, outline=COLOR_TRANSITION)
+            self.canvas.itemconfig(self.circle, start=90, extent=extent, fill=color)
             # Update the timer text
             self.canvas.itemconfig(self.timer_text, text=self.seconds_to_minutes(duration))
             time.sleep(SPEED_DECREASE)
