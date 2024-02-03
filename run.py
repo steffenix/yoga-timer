@@ -71,7 +71,7 @@ class YogaTimerApp:
         self.canvas.pack()
         self.canvas.place(x=0.0, y=150.0)
         self.circle = self.canvas.create_arc(
-            55, 10, 645, 600, start=90, extent=360, fill=COLOR_POSE, outline="systemTransparent")
+            55, 10, 645, 600, start=90, extent=360, fill=COLOR_POSE, outline='systemTransparent')
         self.inner_circle = self.canvas.create_oval(205, 160, 495, 450, fill=COLOR_INNER_CIRCLE, outline=COLOR_INNER_CIRCLE)
         self.timer_text = self.canvas.create_text(350, 305, text="", font=("Bangla MN", 30), fill=COLOR_INNER_TEXT)
          # Initial placeholder image
@@ -92,7 +92,7 @@ class YogaTimerApp:
         self.running = False
         self.current_pose_index = 0
         self.pose_label.config(text="")
-        self.canvas.itemconfig(self.circle, start=90, extent=360, fill=COLOR_POSE)
+        self.canvas.itemconfig(self.circle, start=90, extent=360, fill=COLOR_POSE, outline='systemTransparent')
         self.day_selector.current(0)  # Reset to Day 1
         self.start_button.config(state=tk.NORMAL)
         self.pause_button.config(text="Pause", state=tk.DISABLED)
@@ -148,8 +148,7 @@ class YogaTimerApp:
                         self.transition_period(10, f"Transition to right side")
                     self.pose_label.config(text=f"{pose['Name']} ({side})")
                     # Split duration for each side
-                    self.perform_pose(pose["Duration"] //
-                                      2, pose["Name"] + " " + side)
+                    self.perform_pose(pose["Duration"], pose["Name"] + " " + side)
                     self.speak(pose["Name"] + side)
             else:
                 self.pose_label.config(text=pose["Name"])
