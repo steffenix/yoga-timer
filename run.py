@@ -177,7 +177,7 @@ class YogaTimerApp:
         day = self.day_selector.get()
         pose = self.plan[day]["Poses"][index]
         next_pose_name = pose["Name"]
-        duration = pose["Transition"] if pose["Transition"] else TRANSITION_TIME
+        duration = pose["Transition"] if "Transition" in pose.keys() else TRANSITION_TIME
         message = f"Transition to {next_pose_name}"
         self.update_circle(duration, message, COLOR_TRANSITION)
 
