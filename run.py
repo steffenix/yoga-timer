@@ -1,5 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter import PhotoImage
+from PIL import Image, ImageTk
 import time
 import threading
 import json
@@ -25,11 +27,13 @@ SPEED_DECREASE = 0.1
 
 class YogaTimerApp:
 
-    def __init__(self, master, plan):
+    def __init__(self, master, plan, name_to_image):
         self.master = master
         master.title("Yoga Pose Timer")
+        master.geometry("1600x1000") 
 
         self.plan = plan
+        self.name_to_image = name_to_image
         self.current_pose_index = 0
         self.running = False
 
@@ -63,13 +67,19 @@ class YogaTimerApp:
         self.pose_label = ttk.Label(master, text="", style="Big.TLabel")
         self.pose_label.pack(pady=20)
 
-        self.canvas = tk.Canvas(master, width=700, height=600, bg='white')
+        self.canvas = tk.Canvas(master, width=700, height=600, bg='systemTransparent')
         self.canvas.pack()
+        self.canvas.place(x=0.0, y=100.0)
         self.circle = self.canvas.create_arc(
             55, 10, 645, 600, start=90, extent=360, fill=COLOR_POSE, outline=COLOR_POSE)
         self.inner_circle = self.canvas.create_oval(205, 160, 495, 450, fill=COLOR_INNER_CIRCLE, outline=COLOR_INNER_CIRCLE)
         self.timer_text = self.canvas.create_text(350, 305, text="", font=("Helvetica", 30), fill=COLOR_INNER_TEXT)
-        
+         # Initial placeholder image
+        self.pose_image = PhotoImage()
+        self.image_canvas = tk.Canvas(master, width=900, height=600)
+        self.image_canvas.place(x=700, y=100.0)
+        self.image_item = self.image_canvas.create_image(450, 300, image=self.pose_image) 
+
     def toggle_pause(self):
         self.running = not self.running
         if self.running:
@@ -87,10 +97,32 @@ class YogaTimerApp:
         self.start_button.config(state=tk.NORMAL)
         self.pause_button.config(text="Pause", state=tk.DISABLED)
 
-    def update_pose_label(self):
+    def update_pose_image(self, index):
         day = self.day_selector.get()
-        pose = self.plan[day]["Poses"][self.current_pose_index]
-        self.pose_label.config(text=pose["Name"])
+        pose = self.plan[day]["Poses"][index]
+        if pose["Name"] not in self.name_to_image:
+            self.pose_image = PhotoImage()
+            return
+        image = self.name_to_image[pose["Name"]]
+        image_path = f"images/{image}"
+        if os.path.exists(image_path):
+            image = Image.open(image_path)
+            max_width, max_height = 900, 600
+            original_width, original_height = image.size
+            ratio = min(max_width/original_width, max_height/original_height)
+            new_size = (int(original_width * ratio), int(original_height * ratio))
+            
+            # Resize the image with the calculated ratio
+            resized_image = image.resize(new_size, Image.Resampling.LANCZOS)
+            self.pose_image = ImageTk.PhotoImage(resized_image)
+
+            self.image_canvas.itemconfig(self.image_item, image=self.pose_image)
+            self.image_canvas.coords(self.image_item, max_width/2, max_height/2)
+        else:
+            self.pose_image = PhotoImage()
+            # Optional: Update with a default image if pose image does not exist
+            print(f"No image found for {pose['Name']}, at path: {image_path}")
+
 
     def start_timer(self):
         if not self.running:
@@ -103,6 +135,7 @@ class YogaTimerApp:
 
         # Transition before the first pose
         if self.current_pose_index == 0:
+            self.update_pose_image(self.current_pose_index)
             next_pose_name = poses[self.current_pose_index]["Name"]
             self.transition_period(
                 TRANSITION_TIME, f"Next pose: {next_pose_name}")
@@ -127,6 +160,7 @@ class YogaTimerApp:
             # Transition to the next pose if applicable
             next_pose_index = self.current_pose_index + 1
             if next_pose_index < len(poses):
+                self.update_pose_image(next_pose_index)
                 next_pose_name = poses[next_pose_index]["Name"]
                 self.transition_period(
                     TRANSITION_TIME, f"Next pose: {next_pose_name}")
@@ -173,15 +207,16 @@ class YogaTimerApp:
         seconds_text = f"{remaining_seconds}" if remaining_seconds > 9 else f"0{remaining_seconds}"
         return f"{minutes_text}:{seconds_text}"
 
-def load_plan(file_path):
+def load_json(file_path):
     with open(file_path, 'r') as file:
         return json.load(file)
 
 def main():
     root = tk.Tk()
-    # Ensure this path is correct
-    yoga_plan = load_plan("yoga_plan_complete.json")
-    app = YogaTimerApp(root, yoga_plan)
+    # Ensure this load_json is correct
+    yoga_plan = load_json("yoga_plan_complete.json")
+    name_to_image = load_json("names_to_image.json")
+    app = YogaTimerApp(root, yoga_plan, name_to_image)
     with keep.presenting() as k:
         root.mainloop()
 
