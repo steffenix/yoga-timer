@@ -83,8 +83,8 @@ class YogaTimerApp:
     def toggle_pause(self):
         self.running = not self.running
         if self.running:
-            threading.Thread(target=self.countdown, daemon=True).start()
             self.pause_button.config(text="Pause")
+            threading.Thread(target=self.countdown, daemon=True).start()
         else:
             self.pause_button.config(text="Resume")
 
@@ -137,8 +137,7 @@ class YogaTimerApp:
         if self.current_pose_index == 0:
             self.update_pose_image(self.current_pose_index)
             next_pose_name = poses[self.current_pose_index]["Name"]
-            self.transition_period(
-                TRANSITION_TIME, f"Next pose: {next_pose_name}")
+            self.transition_period(self.current_pose_index)
 
         while self.current_pose_index < len(poses) and self.running:
             pose = poses[self.current_pose_index]
@@ -161,9 +160,7 @@ class YogaTimerApp:
             next_pose_index = self.current_pose_index + 1
             if next_pose_index < len(poses):
                 self.update_pose_image(next_pose_index)
-                next_pose_name = poses[next_pose_index]["Name"]
-                self.transition_period(
-                    TRANSITION_TIME, f"Next pose: {next_pose_name}")
+                self.transition_period(next_pose_index)
             self.current_pose_index += 1
 
         if self.current_pose_index >= len(poses):
@@ -173,24 +170,23 @@ class YogaTimerApp:
 
     def perform_pose(self, duration, pose_name):
         """Updated to modify the inner circle and timer text."""
-        self.pose_label.config(text=pose_name)
-        pose_duration = duration
-        while duration > 0 and self.running:
-            extent = (duration * 360) / pose_duration
-            self.canvas.itemconfig(self.circle, start=90, extent=extent, fill=COLOR_POSE, outline=COLOR_POSE)
-            # Update the timer text
-            self.canvas.itemconfig(self.timer_text, text=self.seconds_to_minutes(duration))
-            time.sleep(SPEED_DECREASE)
-            duration -= SPEED_DECREASE
-            self.master.update()
+        self.update_circle(duration, pose_name, COLOR_POSE)
 
-    def transition_period(self, duration, message):
+    def transition_period(self, index):
         """Updated to modify the inner circle and timer text during transitions."""
+        day = self.day_selector.get()
+        pose = self.plan[day]["Poses"][index]
+        next_pose_name = pose["Name"]
+        duration = pose["Transition"] if pose["Transition"] else TRANSITION_TIME
+        message = f"Transition to {next_pose_name}"
+        self.update_circle(duration, message, COLOR_TRANSITION)
+
+    def update_circle(self, duration, message, color):
         self.pose_label.config(text=message)
-        total_transition_time = duration
+        total_time = duration
         while duration > 0 and self.running:
-            extent = (duration * 360) / total_transition_time
-            self.canvas.itemconfig(self.circle, start=90, extent=extent, fill=COLOR_TRANSITION, outline=COLOR_TRANSITION)
+            extent = (duration * 360) / total_time
+            self.canvas.itemconfig(self.circle, start=90, extent=extent, fill=color, outline=COLOR_TRANSITION)
             # Update the timer text
             self.canvas.itemconfig(self.timer_text, text=self.seconds_to_minutes(duration))
             time.sleep(SPEED_DECREASE)

@@ -3,7 +3,8 @@
         "Poses": [
             {
                 "Name": "Butterfly Pose",
-                "Duration": 300
+                "Duration": 300,
+                "Transition": 25
             },
             {
                 "Name": "Seated Twist (Debounce)",
