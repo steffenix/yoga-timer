@@ -30,7 +30,7 @@ class YogaTimerApp:
     def __init__(self, master, plan, name_to_image):
         self.master = master
         master.title("Yoga Pose Timer")
-        master.geometry("1600x1000") 
+        master.geometry("1600x850") 
 
         self.plan = plan
         self.name_to_image = name_to_image
@@ -39,9 +39,9 @@ class YogaTimerApp:
 
         # Style configuration
         style = ttk.Style()
-        style.configure("TLabel", font=("Helvetica", 14))
-        style.configure("TButton", font=("Helvetica", 12))
-        style.configure("Big.TLabel", font=("Helvetica", 30))
+        style.configure("TLabel", font=("Bangla MN", 14))
+        style.configure("TButton", font=("Bangla MN", 12), padding=[3, 8, 3, 3])
+        style.configure("Big.TLabel", font=("Bangla MN", 30))
 
         # Layout configuration
         control_frame = ttk.Frame(master)
@@ -65,19 +65,19 @@ class YogaTimerApp:
         self.reset_button.pack(side=tk.LEFT, padx=5)
 
         self.pose_label = ttk.Label(master, text="", style="Big.TLabel")
-        self.pose_label.pack(pady=20)
+        self.pose_label.pack(pady=0)
 
         self.canvas = tk.Canvas(master, width=700, height=600, bg='systemTransparent')
         self.canvas.pack()
-        self.canvas.place(x=0.0, y=100.0)
+        self.canvas.place(x=0.0, y=150.0)
         self.circle = self.canvas.create_arc(
             55, 10, 645, 600, start=90, extent=360, fill=COLOR_POSE, outline=COLOR_POSE)
         self.inner_circle = self.canvas.create_oval(205, 160, 495, 450, fill=COLOR_INNER_CIRCLE, outline=COLOR_INNER_CIRCLE)
-        self.timer_text = self.canvas.create_text(350, 305, text="", font=("Helvetica", 30), fill=COLOR_INNER_TEXT)
+        self.timer_text = self.canvas.create_text(350, 305, text="", font=("Bangla MN", 30), fill=COLOR_INNER_TEXT)
          # Initial placeholder image
         self.pose_image = PhotoImage()
         self.image_canvas = tk.Canvas(master, width=900, height=600)
-        self.image_canvas.place(x=700, y=100.0)
+        self.image_canvas.place(x=700, y=150.0)
         self.image_item = self.image_canvas.create_image(450, 300, image=self.pose_image) 
 
     def toggle_pause(self):
