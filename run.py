@@ -145,7 +145,7 @@ class YogaTimerApp:
             if "Side" in pose:
                 for side in ["Left", "Right"]:
                     if side == "Right":
-                        self.transition_period(10, f"Transition to right side")
+                        self.transition_period(self.current_pose_index, side)
                     self.pose_label.config(text=f"{pose['Name']} ({side})")
                     # Split duration for each side
                     self.perform_pose(pose["Duration"], pose["Name"] + " " + side)
@@ -171,11 +171,12 @@ class YogaTimerApp:
         """Updated to modify the inner circle and timer text."""
         self.update_circle(duration, pose_name, COLOR_POSE)
 
-    def transition_period(self, index):
+    def transition_period(self, index, side=""):
         """Updated to modify the inner circle and timer text during transitions."""
         day = self.day_selector.get()
         pose = self.plan[day]["Poses"][index]
         next_pose_name = pose["Name"]
+        next_pose_name = next_pose_name + " " + side if side else next_pose_name
         duration = pose["Transition"] if "Transition" in pose.keys() else TRANSITION_TIME
         message = f"Transition to {next_pose_name}"
         self.update_circle(duration, message, COLOR_TRANSITION)
